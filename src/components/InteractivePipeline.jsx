@@ -1,284 +1,348 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { GitBranch, Wrench, CheckCircle, Package, Send, Play, RefreshCw } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Play, RotateCcw, Code, Cpu, ShieldCheck, Box, CloudLightning } from 'lucide-react';
 
-function InteractivePipeline() {
-  const [pipelineState, setPipelineState] = useState('idle'); // idle, running, success
-  const [activeStage, setActiveStage] = useState(-1); // index of active stage
+const InteractivePipeline = () => {
+  const [status, setStatus] = useState('idle'); // idle, running, completed, error
+  const [currentStep, setCurrentStep] = useState(-1);
   const [logs, setLogs] = useState([]);
-  const [stageStatuses, setStageStatuses] = useState(['idle', 'idle', 'idle', 'idle', 'idle']); // idle, running, success
-  const logEndRef = useRef(null);
-
-  const stages = [
-    { name: "Code Commit", icon: GitBranch, description: "Webhook Trigger" },
-    { name: "Artifact Build", icon: Wrench, description: "Vite Compile" },
-    { name: "Unit Testing", icon: CheckCircle, description: "PyTest Suite" },
-    { name: "Dockerize", icon: Package, description: "AWS ECR Push" },
-    { name: "AWS Deploy", icon: Send, description: "ECS/EKS Release" }
+  
+  const steps = [
+    { name: 'Code', icon: Code, desc: 'Linting & Static Analysis' },
+    { name: 'Build', icon: Cpu, desc: 'Webpack Production Bundle' },
+    { name: 'Test', icon: ShieldCheck, desc: 'Unit & Integration Suites' },
+    { name: 'Docker', icon: Box, desc: 'Image Build & AWS ECR Push' },
+    { name: 'Deploy', icon: CloudLightning, desc: 'Rolling Update to AWS EKS' }
   ];
 
-  const stageLogs = [
+  const logMessages = [
     [
-      "Connecting to GitHub Webhook listener...",
-      "Event received: push on repository: main",
-      "Commit ID: ac7d0fa - Author: student@aws-shell",
-      "Fetching branch info... origin/main ready.",
-      "STAGE 1 COMPLETE: Source code checkout success."
+      'Cloning repository advaitam07/aws-devops-portfolio...',
+      'Checking branch main, commit SHA: 8a7c29e...',
+      'Running eslint rule check...',
+      'SUCCESS: 0 linting errors found.'
     ],
     [
-      "Initializing environment variables...",
-      "Running npm install --frozen-lockfile...",
-      "Compiling source files using Vite builder...",
-      "Assets optimized (size: 412kB). Chunk split complete.",
-      "STAGE 2 COMPLETE: Production bundle output saved to dist/."
+      'Running build script: npm run build...',
+      'Generating optimized static assets...',
+      'Chunks created successfully. Size: 1.2MB.',
+      'SUCCESS: Webpack bundle ready.'
     ],
     [
-      "Triggering test runner...",
-      "Running pytest tests/cloud_boto3_test.py...",
-      "Running frontend vitest assertions...",
-      "PASS: AWS Lambda trigger test (0.04s)",
-      "PASS: SPA Route hydration matches (0.12s)",
-      "All 12 unit tests passed. Code Coverage: 94.6%",
-      "STAGE 3 COMPLETE: Test metrics approved."
+      'Executing unit testing suite...',
+      'Running jest verification on 24 test cases...',
+      'All tests passed successfully (100% code coverage).',
+      'SUCCESS: Test phase complete.'
     ],
     [
-      "Reading local Dockerfile... Multi-stage architecture detected.",
-      "Executing Step 1/8: FROM node:18-alpine...",
-      "Executing Step 5/8: COPY --from=builder /app/dist...",
-      "Compressing layer filesystems... Image size: 48.2 MB",
-      "Logging in to AWS Elastic Container Registry (ECR)...",
-      "Pushing image student-portfolio:latest to AWS ECR registry...",
-      "SHA256 digest: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "STAGE 4 COMPLETE: Docker ECR release published."
+      'Creating container build context...',
+      'Executing command: docker build -t portfolio:latest .',
+      'Injecting production environment variables...',
+      'Pushing image layers to AWS ECR: 123456789.dkr.ecr.us-east-1.amazonaws.com...',
+      'SUCCESS: Image tag v1.0.4 registered.'
     ],
     [
-      "Initializing AWS CLI authentication tokens...",
-      "Fetching Amazon ECS Service Status... Active.",
-      "Applying rolling updates to cluster nodes...",
-      "Running Database migrations (RDS MySQL updates)... Done.",
-      "Routing network interfaces via Application Load Balancer (ALB)...",
-      "DNS propagation check: student-portfolio.awsdevops.student [OK]",
-      "STAGE 5 COMPLETE: Application successfully live in Staging VPC!"
+      'Triggering rolling update for cluster deployment...',
+      'Connecting to AWS EKS cluster api...',
+      'Applying Helm charts deployment.yaml...',
+      'Verifying pod health status: 3/3 active.',
+      'SUCCESS: Traffic routed to new containers.'
     ]
   ];
 
   const runPipeline = async () => {
-    if (pipelineState === 'running') return;
-
-    setPipelineState('running');
-    setLogs(["[SYSTEM] Initiating DevOps automation pipeline trigger..."]);
-    setStageStatuses(['idle', 'idle', 'idle', 'idle', 'idle']);
-    setActiveStage(0);
-
-    for (let i = 0; i < stages.length; i++) {
-      setActiveStage(i);
+    if (status === 'running') return;
+    setStatus('running');
+    setLogs(['[INFO] Pipeline initiated by user command.']);
+    
+    for (let i = 0; i < steps.length; i++) {
+      setCurrentStep(i);
       
-      // Update stage status to running
-      setStageStatuses(prev => {
-        const next = [...prev];
-        next[i] = 'running';
-        return next;
-      });
-
-      setLogs(prev => [...prev, `\n>>> STARTING STAGE ${i + 1}: ${stages[i].name} <<<`]);
-
-      // Print logs sequentially
-      const logsForStage = stageLogs[i];
-      for (const logLine of logsForStage) {
-        await new Promise(resolve => setTimeout(resolve, 350));
-        setLogs(prev => [...prev, `[LOG] ${logLine}`]);
+      // Append stage starting log
+      setLogs(prev => [...prev, `[STAGE: ${steps[i].name}] Launching...`]);
+      
+      // Simulate step progress logs
+      for (let j = 0; j < logMessages[i].length; j++) {
+        await new Promise(resolve => setTimeout(resolve, 350 + Math.random() * 200));
+        setLogs(prev => [...prev, `  > ${logMessages[i][j]}`]);
       }
-
-      // Update stage status to success
-      setStageStatuses(prev => {
-        const next = [...prev];
-        next[i] = 'success';
-        return next;
-      });
-
-      await new Promise(resolve => setTimeout(resolve, 500));
+      
+      setLogs(prev => [...prev, `[STAGE: ${steps[i].name}] Completed Successfully.`, '']);
+      await new Promise(resolve => setTimeout(resolve, 400));
     }
-
-    setPipelineState('success');
-    setActiveStage(-1);
-    setLogs(prev => [...prev, "\n[SUCCESS] CI/CD pipeline finished successfully. Deploy state: ACTIVE."]);
+    
+    setCurrentStep(-1);
+    setStatus('completed');
+    setLogs(prev => [
+      ...prev,
+      '[PIPELINE SUCCESS] Release v1.0.4 deployed to AWS EC2/EKS production environment.',
+      '[INFO] Deployment Health Status: green',
+      `[INFO] Target Endpoint: https://portfolio.advait.dev/`
+    ]);
   };
 
-  const getStageColor = (status, isActive) => {
-    if (status === 'success') return 'var(--success)';
-    if (status === 'running') return 'var(--secondary)';
-    if (isActive) return 'var(--primary)';
-    return 'var(--text-muted)';
+  const resetPipeline = () => {
+    setStatus('idle');
+    setCurrentStep(-1);
+    setLogs([]);
   };
-
-  useEffect(() => {
-    logEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [logs]);
 
   return (
-    <div style={{ maxWidth: '900px', margin: '2rem auto 0 auto' }}>
-      {/* Pipeline Diagram */}
-      <div className="glass-panel" style={{
-        padding: '2.5rem 2rem',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '2rem',
-        alignItems: 'center',
-        marginBottom: '2rem'
-      }}>
-        {/* Stages list */}
-        <div style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          width: '100%',
-          position: 'relative',
-          flexWrap: 'wrap',
-          gap: '2rem'
-        }} className="pipeline-flex">
-          {/* Connector Line */}
-          <div style={{
-            position: 'absolute',
-            top: '25px',
-            left: '5%',
-            width: '90%',
-            height: '2px',
-            backgroundColor: 'rgba(255, 255, 255, 0.05)',
-            zIndex: 1
-          }} className="pipeline-line" />
+    <div className="glass-card" style={styles.container}>
+      <div style={styles.header}>
+        <div>
+          <h3 style={styles.title}>DevOps CI/CD Pipeline Simulator</h3>
+          <p style={styles.subtitle}>Trigger a mock production deployment workflow to see container orchestration in action.</p>
+        </div>
+        <div style={styles.actions}>
+          {status === 'completed' || status === 'running' ? (
+            <button 
+              onClick={resetPipeline} 
+              disabled={status === 'running'} 
+              className="btn btn-secondary" 
+              style={{ ...styles.actionBtn, opacity: status === 'running' ? 0.5 : 1 }}
+            >
+              <RotateCcw size={16} /> Reset
+            </button>
+          ) : null}
+          <button 
+            onClick={runPipeline} 
+            disabled={status === 'running'} 
+            className="btn btn-primary" 
+            style={styles.actionBtn}
+          >
+            <Play size={16} /> Trigger Build
+          </button>
+        </div>
+      </div>
 
-          {stages.map((stage, idx) => {
-            const Icon = stage.icon;
-            const status = stageStatuses[idx];
-            const isActive = activeStage === idx;
-            const borderCol = getStageColor(status, isActive);
-            
-            return (
-              <div key={idx} style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                gap: '0.75rem',
-                position: 'relative',
-                zIndex: 2,
-                flex: '1 1 0px',
-                minWidth: '100px'
-              }}>
-                {/* Node circle */}
-                <div style={{
-                  width: '52px',
-                  height: '52px',
-                  borderRadius: '50%',
-                  backgroundColor: status === 'running' ? 'rgba(0, 210, 255, 0.1)' : 'var(--bg-secondary)',
-                  border: `2px solid ${borderCol}`,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: borderCol,
-                  boxShadow: status === 'running' ? '0 0 15px rgba(0, 210, 255, 0.3)' : status === 'success' ? '0 0 15px rgba(16, 185, 129, 0.2)' : 'none',
-                  animation: status === 'running' ? 'pulse-cyan 1.5s infinite' : 'none',
-                  transition: 'var(--transition-smooth)'
-                }}>
-                  {status === 'running' ? (
-                    <RefreshCw size={22} className="spinning" style={{ animation: 'spin-slow 2s linear infinite' }} />
-                  ) : (
-                    <Icon size={22} />
+      {/* Visual Pipeline Grid */}
+      <div style={styles.pipeline}>
+        {steps.map((step, idx) => {
+          const StepIcon = step.icon;
+          const isActive = currentStep === idx;
+          const isCompleted = status === 'completed' || (currentStep > idx && status === 'running');
+          
+          let circleColor = 'rgba(255, 255, 255, 0.15)';
+          let iconColor = 'var(--color-text-muted)';
+          let glowStyle = {};
+
+          if (isActive) {
+            circleColor = 'rgba(0, 210, 255, 0.2)';
+            iconColor = 'var(--devops-blue)';
+            glowStyle = {
+              border: '2px solid var(--devops-blue)',
+              boxShadow: '0 0 15px rgba(0, 210, 255, 0.6)',
+              animation: 'pulseGlowBlue 1.5s infinite alternate'
+            };
+          } else if (isCompleted) {
+            circleColor = 'rgba(16, 185, 129, 0.2)';
+            iconColor = 'var(--success-green)';
+            glowStyle = {
+              border: '2px solid var(--success-green)',
+              boxShadow: '0 0 10px rgba(16, 185, 129, 0.4)'
+            };
+          }
+
+          return (
+            <React.Fragment key={idx}>
+              {/* Pipeline Node */}
+              <div style={styles.nodeWrapper}>
+                <div style={{ ...styles.circle, ...glowStyle, backgroundColor: circleColor }}>
+                  <StepIcon size={24} color={iconColor} />
+                </div>
+                <div style={styles.nodeLabel}>{step.name}</div>
+                <div style={styles.nodeDesc}>{step.desc}</div>
+              </div>
+
+              {/* Connecting Line (except last item) */}
+              {idx < steps.length - 1 && (
+                <div style={styles.connectorContainer}>
+                  <div 
+                    style={{ 
+                      ...styles.connectorLine, 
+                      backgroundColor: isCompleted ? 'var(--success-green)' : isActive ? 'var(--devops-blue)' : 'rgba(255,255,255,0.08)' 
+                    }} 
+                  />
+                  {isActive && (
+                    <div className="flow-dot" style={styles.flowDot} />
                   )}
                 </div>
-
-                <div style={{ textAlign: 'center' }}>
-                  <h4 style={{
-                    fontSize: '0.85rem',
-                    color: isActive ? 'var(--secondary)' : '#ffffff',
-                    fontWeight: 600
-                  }}>{stage.name}</h4>
-                  <span style={{
-                    fontSize: '0.7rem',
-                    color: 'var(--text-muted)'
-                  }}>{stage.description}</span>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Action Buttons */}
-        <button
-          onClick={runPipeline}
-          disabled={pipelineState === 'running'}
-          className={`btn ${pipelineState === 'running' ? 'btn-tertiary' : 'btn-primary'}`}
-          style={{
-            minWidth: '200px',
-            marginTop: '1rem'
-          }}
-        >
-          {pipelineState === 'running' ? (
-            <>
-              <RefreshCw size={16} className="spinning" style={{ animation: 'spin-slow 2s linear infinite' }} /> Running Pipeline...
-            </>
-          ) : (
-            <>
-              <Play size={16} /> Run Pipeline Simulation
-            </>
-          )}
-        </button>
+              )}
+            </React.Fragment>
+          );
+        })}
       </div>
 
-      {/* Log Console Output */}
-      <div style={{
-        backgroundColor: '#0F172A',
-        borderRadius: '12px',
-        border: '1px solid var(--glass-border)',
-        boxShadow: '0 15px 35px rgba(0, 0, 0, 0.4)',
-        padding: '1.5rem',
-        height: '240px',
-        overflowY: 'auto',
-        fontFamily: 'Consolas, Monaco, "Courier New", Courier, monospace',
-        fontSize: '0.85rem',
-        lineHeight: 1.6,
-        color: '#E2E8F0'
-      }}>
-        {logs.length === 0 ? (
-          <span style={{ color: 'var(--text-muted)' }}>Console idle. Click "Run Pipeline Simulation" to view outputs.</span>
-        ) : (
-          logs.map((log, idx) => {
-            let color = '#E2E8F0';
-            if (log.startsWith('>>>')) color = 'var(--secondary)';
-            else if (log.startsWith('[SYSTEM]')) color = 'var(--primary)';
-            else if (log.includes('COMPLETE') || log.includes('SUCCESS')) color = 'var(--success)';
-            
-            return (
-              <div key={idx} style={{ color, whiteSpace: 'pre-wrap' }}>
+      {/* Rolling Console Output Log */}
+      <div style={styles.consoleContainer}>
+        <div style={styles.consoleHeader}>
+          <span>AWS/EKS Deployment Logs</span>
+          <span style={styles.statusIndicator}>
+            STATUS: <span style={{ color: status === 'completed' ? 'var(--success-green)' : status === 'running' ? 'var(--devops-blue)' : '#9CA3AF' }}>
+              {status.toUpperCase()}
+            </span>
+          </span>
+        </div>
+        <div style={styles.consoleScreen}>
+          {logs.length === 0 ? (
+            <span style={{ color: 'var(--color-text-muted)', fontStyle: 'italic' }}>
+              Pipeline idle. Waiting for trigger signals...
+            </span>
+          ) : (
+            logs.map((log, lIdx) => (
+              <div 
+                key={lIdx} 
+                style={{ 
+                  ...styles.logLine,
+                  color: log.includes('SUCCESS') || log.includes('PIPELINE SUCCESS')
+                    ? 'var(--success-green)' 
+                    : log.includes('[STAGE:') 
+                      ? 'var(--devops-blue)' 
+                      : '#E5E7EB'
+                }}
+              >
                 {log}
               </div>
-            );
-          })
-        )}
-        <div ref={logEndRef} />
+            ))
+          )}
+        </div>
       </div>
-
-      <style>{`
-        @media (max-width: 768px) {
-          .pipeline-flex {
-            flex-direction: column !important;
-            align-items: flex-start !important;
-            gap: 1.5rem !important;
-          }
-          .pipeline-line {
-            display: none !important;
-          }
-          .pipeline-flex > div {
-            flex-direction: row !important;
-            align-items: center !important;
-            width: 100% !important;
-            text-align: left !important;
-          }
-          .pipeline-flex > div > div {
-            text-align: left !important;
-          }
-        }
-      `}</style>
     </div>
   );
-}
+};
+
+// CSS styles
+const styles = {
+  container: {
+    padding: '30px',
+    border: '1px solid var(--border-color)',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '30px'
+  },
+  header: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    gap: '15px'
+  },
+  title: {
+    fontSize: '1.25rem',
+    color: '#FFFFFF',
+    marginBottom: '5px'
+  },
+  subtitle: {
+    fontSize: '0.85rem',
+    color: 'var(--color-text-secondary)'
+  },
+  actions: {
+    display: 'flex',
+    gap: '10px'
+  },
+  actionBtn: {
+    fontSize: '0.85rem',
+    padding: '0.5rem 1rem',
+    borderRadius: '4px',
+    height: '38px'
+  },
+  pipeline: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: '20px 0',
+    overflowX: 'auto',
+    width: '100%',
+    gap: '10px'
+  },
+  nodeWrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    minWidth: '90px',
+    textAlign: 'center'
+  },
+  circle: {
+    width: '56px',
+    height: '56px',
+    borderRadius: '50%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    border: '1px solid rgba(255, 255, 255, 0.08)',
+    transition: 'all 0.4s ease'
+  },
+  nodeLabel: {
+    fontWeight: '600',
+    marginTop: '10px',
+    fontSize: '0.9rem',
+    color: '#FFFFFF'
+  },
+  nodeDesc: {
+    fontSize: '0.7rem',
+    color: 'var(--color-text-muted)',
+    marginTop: '3px',
+    maxWidth: '120px'
+  },
+  connectorContainer: {
+    flexGrow: 1,
+    height: '4px',
+    position: 'relative',
+    minWidth: '30px',
+    display: 'flex',
+    alignItems: 'center'
+  },
+  connectorLine: {
+    width: '100%',
+    height: '100%',
+    borderRadius: '2px',
+    transition: 'background-color 0.4s ease'
+  },
+  flowDot: {
+    width: '10px',
+    height: '10px',
+    borderRadius: '50%',
+    backgroundColor: 'var(--devops-blue)',
+    position: 'absolute',
+    left: '0',
+    top: '-3px',
+    boxShadow: '0 0 8px var(--devops-blue)',
+    animation: 'pipelineFlow 1.2s infinite linear'
+  },
+  consoleContainer: {
+    border: '1px solid rgba(255, 255, 255, 0.08)',
+    borderRadius: '8px',
+    overflow: 'hidden',
+    backgroundColor: '#070A13'
+  },
+  consoleHeader: {
+    backgroundColor: '#0E1322',
+    padding: '10px 15px',
+    fontSize: '0.75rem',
+    color: 'var(--color-text-secondary)',
+    display: 'flex',
+    justifyContent: 'space-between',
+    borderBottom: '1px solid rgba(255, 255, 255, 0.06)'
+  },
+  statusIndicator: {
+    fontWeight: 'bold',
+    fontFamily: 'var(--font-mono)'
+  },
+  consoleScreen: {
+    padding: '15px',
+    height: '180px',
+    overflowY: 'auto',
+    fontFamily: 'var(--font-mono)',
+    fontSize: '0.8rem',
+    lineHeight: '1.6',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '4px'
+  },
+  logLine: {
+    animation: 'serverLogFade 0.2s ease forwards',
+    whiteSpace: 'pre-wrap'
+  }
+};
 
 export default InteractivePipeline;

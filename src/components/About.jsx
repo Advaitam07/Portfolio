@@ -1,198 +1,183 @@
 import React from 'react';
-import { BookOpen, Target, Award, Brain } from 'lucide-react';
+import { GraduationCap, Target, Eye, User } from 'lucide-react';
 
-function About() {
-  const learningStack = [
-    { name: 'AWS Services & DevOps Tools', level: 85, color: 'var(--primary)' },
-    { name: 'Docker & Containerization', level: 90, color: 'var(--secondary)' },
-    { name: 'Kubernetes Orchestration', level: 75, color: 'var(--secondary)' },
-    { name: 'Jenkins CI/CD Automation', level: 80, color: 'var(--primary)' },
-    { name: 'Terraform Infrastructure as Code', level: 70, color: 'var(--secondary)' },
-    { name: 'Linux Systems & Bash Shell Scripting', level: 85, color: 'var(--success)' },
+const About = () => {
+  const cards = [
+    {
+      icon: GraduationCap,
+      title: 'Education',
+      details: 'B.Tech in Information Technology',
+      desc: 'Focused on operating systems, distributed architectures, software engineering, and database management systems.'
+    },
+    {
+      icon: Target,
+      title: 'Career Objectives',
+      details: 'DevOps & Site Reliability',
+      desc: 'Aims to eliminate manual developer friction by orchestrating automated container systems, CI/CD integrations, and cloud hosting.'
+    },
+    {
+      icon: Eye,
+      title: 'Current Focus',
+      details: 'AWS & Kubernetes Scaling',
+      desc: 'Deep diving into multi-region high-availability configurations, cost optimization scripts, and infrastructure deployment via Terraform.'
+    }
   ];
 
   return (
-    <div style={{
-      padding: '8rem 0',
-      backgroundColor: 'var(--bg-secondary)',
-      position: 'relative'
-    }}>
+    <section id="about" className="section" style={styles.section}>
       <div className="container">
-        <div className="section-header">
-          <span className="section-subtitle">Profile</span>
-          <h2 className="section-title">About Me</h2>
+        {/* Section Header */}
+        <div className="section-title-wrapper">
+          <p className="section-subtitle">Profile Overview</p>
+          <h2 className="section-title">About <span>Me</span></h2>
         </div>
 
-        <div className="about-content-grid" style={{
-          display: 'grid',
-          gridTemplateColumns: '1.1fr 0.9fr',
-          gap: '4rem'
-        }}>
-          {/* Left Column: Bio Details */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-            <div className="glass-panel" style={{ padding: '2rem' }}>
-              <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center', marginBottom: '1.5rem', flexWrap: 'wrap' }} className="bio-header-wrapper">
-                <img
-                  src="/profile.jpg"
-                  alt="Aditya Sharma profile picture"
-                  style={{
-                    width: '100px',
-                    height: '100px',
-                    borderRadius: '50%',
-                    objectFit: 'cover',
-                    border: '3px solid var(--primary)',
-                    boxShadow: 'var(--glow-orange)',
-                    flexShrink: 0
-                  }}
-                />
-                <div>
-                  <h3 style={{
-                    fontSize: '1.4rem',
-                    marginBottom: '0.25rem',
-                    color: '#ffffff',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.75rem'
-                  }}>
-                    <Brain style={{ color: 'var(--primary)' }} size={20} /> Professional Summary
-                  </h3>
-                  <span style={{ fontSize: '0.85rem', color: 'var(--secondary)', fontFamily: 'var(--font-title)', fontWeight: 600, letterSpacing: '0.05em', textTransform: 'uppercase' }}>Aditya Sharma</span>
-                </div>
-              </div>
-              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, fontSize: '0.975rem' }}>
-                I am a passionate Information Technology Engineering student with a deep interest in cloud infrastructure design, DevOps processes, and system automation. I specialize in translating complex system requirements into scalable, reliable, and secure cloud environments on Amazon Web Services.
-              </p>
-              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, fontSize: '0.975rem', marginTop: '1rem' }}>
-                Through hands-on projects, I design production-ready infrastructures using Docker, deploy resilient applications to Kubernetes, and build robust CI/CD pipelines to achieve automated operations.
-              </p>
-            </div>
-
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
-              gap: '1.5rem'
-            }} className="about-sub-cards">
-              <div className="glass-panel" style={{ padding: '1.5rem' }}>
-                <h4 style={{
-                  fontSize: '1.1rem',
-                  color: '#ffffff',
-                  marginBottom: '0.75rem',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.5rem'
-                }}>
-                  <BookOpen style={{ color: 'var(--secondary)' }} size={18} /> Education
-                </h4>
-                <p style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--text-primary)' }}>
-                  B.Tech in IT Engineering
-                </p>
-                <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
-                  Ongoing Academic Degree
-                </p>
-                <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>
-                  Focus: Cloud Computing, OS, Networks, DBMS
-                </p>
-              </div>
-
-              <div className="glass-panel" style={{ padding: '1.5rem' }}>
-                <h4 style={{
-                  fontSize: '1.1rem',
-                  color: '#ffffff',
-                  marginBottom: '0.75rem',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.5rem'
-                }}>
-                  <Target style={{ color: 'var(--primary)' }} size={18} /> Objectives
-                </h4>
-                <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
-                  Aiming to secure a Cloud Devops internship or junior role to apply automation concepts, container strategies, and AWS methodologies.
-                </p>
+        {/* Profile Split Layout */}
+        <div style={styles.split}>
+          <div className="glass-card" style={styles.profileCard}>
+            <div style={styles.avatarWrapper}>
+              <div style={styles.avatarGlow}></div>
+              <div style={styles.avatar}>
+                <User size={48} color="var(--aws-orange)" />
               </div>
             </div>
+            <h3 style={styles.profileTitle}>Advait</h3>
+            <p style={styles.profileRole}>AWS / DevOps Student Engineer</p>
+            <div style={styles.divider}></div>
+            <p style={styles.profileText}>
+              I am a final-year Information Technology student with a strong engineering foundation and a passion for automation, cloud infrastructure, and software scalability. I build bridges between clean application code and resilient cloud operations.
+            </p>
           </div>
 
-          {/* Right Column: Currently Learning Stack */}
-          <div className="glass-panel" style={{
-            padding: '2rem',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '1.5rem'
-          }}>
-            <div>
-              <h3 style={{
-                fontSize: '1.4rem',
-                color: '#ffffff',
-                marginBottom: '0.5rem',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.75rem'
-              }}>
-                <Award style={{ color: 'var(--success)' }} size={20} /> Currently Learning
-              </h3>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
-                Actively strengthening expertise and training in the following technical areas:
-              </p>
-            </div>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-              {learningStack.map((tech) => (
-                <div key={tech.name}>
-                  <div style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    fontSize: '0.85rem',
-                    fontWeight: 500,
-                    marginBottom: '0.5rem',
-                    color: 'var(--text-primary)'
-                  }}>
-                    <span>{tech.name}</span>
-                    <span style={{ color: tech.color }}>{tech.level}%</span>
+          <div style={styles.detailsCol}>
+            {cards.map((card, idx) => {
+              const Icon = card.icon;
+              return (
+                <div key={idx} className="glass-card" style={styles.aboutCard}>
+                  <div style={styles.iconCircle}>
+                    <Icon size={22} color="var(--devops-blue)" />
                   </div>
-                  <div style={{
-                    width: '100%',
-                    height: '6px',
-                    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                    borderRadius: '10px',
-                    overflow: 'hidden'
-                  }}>
-                    <div style={{
-                      width: `${tech.level}%`,
-                      height: '100%',
-                      backgroundColor: tech.color,
-                      borderRadius: '10px',
-                      boxShadow: `0 0 10px ${tech.color}`
-                    }} />
+                  <div>
+                    <h4 style={styles.cardTitle}>{card.title}</h4>
+                    <h5 style={styles.cardSubtitle}>{card.details}</h5>
+                    <p style={styles.cardDesc}>{card.desc}</p>
                   </div>
                 </div>
-              ))}
-            </div>
+              );
+            })}
           </div>
         </div>
       </div>
-
-      <style>{`
-        @media (max-width: 991px) {
-          .about-content-grid {
-            grid-template-columns: 1fr !important;
-            gap: 2rem !important;
-          }
-        }
-        @media (max-width: 576px) {
-          .bio-header-wrapper {
-            flex-direction: column !important;
-            align-items: center !important;
-            text-align: center !important;
-          }
-        }
-        @media (max-width: 480px) {
-          .about-sub-cards {
-            grid-template-columns: 1fr !important;
-          }
-        }
-      `}</style>
-    </div>
+    </section>
   );
-}
+};
+
+const styles = {
+  section: {
+    backgroundColor: 'var(--bg-secondary)',
+    borderBottom: '1px solid var(--border-color)'
+  },
+  split: {
+    display: 'grid',
+    gridTemplateColumns: '0.8fr 1.2fr',
+    gap: '35px',
+    alignItems: 'stretch'
+  },
+  profileCard: {
+    padding: '40px 30px',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    textAlign: 'center',
+    height: '100%',
+    justifyContent: 'center'
+  },
+  avatarWrapper: {
+    position: 'relative',
+    marginBottom: '20px'
+  },
+  avatarGlow: {
+    position: 'absolute',
+    top: '-5px',
+    left: '-5px',
+    right: '-5px',
+    bottom: '-5px',
+    borderRadius: '50%',
+    background: 'linear-gradient(135deg, var(--aws-orange) 0%, var(--devops-blue) 100%)',
+    filter: 'blur(8px)',
+    opacity: 0.6
+  },
+  avatar: {
+    width: '100px',
+    height: '100px',
+    borderRadius: '50%',
+    backgroundColor: '#0F1322',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'relative',
+    zIndex: 1,
+    border: '2px solid rgba(255, 255, 255, 0.08)'
+  },
+  profileTitle: {
+    fontSize: '1.5rem',
+    marginBottom: '5px'
+  },
+  profileRole: {
+    fontSize: '0.85rem',
+    color: 'var(--devops-blue)',
+    fontFamily: 'var(--font-mono)',
+    marginBottom: '20px'
+  },
+  divider: {
+    width: '50px',
+    height: '2px',
+    backgroundColor: 'var(--border-color)',
+    marginBottom: '20px'
+  },
+  profileText: {
+    fontSize: '0.95rem',
+    lineHeight: '1.6',
+    color: 'var(--color-text-secondary)'
+  },
+  detailsCol: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '20px'
+  },
+  aboutCard: {
+    padding: '25px',
+    display: 'flex',
+    gap: '20px',
+    alignItems: 'flex-start'
+  },
+  iconCircle: {
+    width: '46px',
+    height: '46px',
+    borderRadius: '8px',
+    backgroundColor: 'var(--devops-blue-glow)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexShrink: 0,
+    border: '1px solid rgba(0, 210, 255, 0.15)'
+  },
+  cardTitle: {
+    fontSize: '1.1rem',
+    marginBottom: '3px',
+    color: '#FFFFFF'
+  },
+  cardSubtitle: {
+    fontSize: '0.85rem',
+    color: 'var(--aws-orange)',
+    fontFamily: 'var(--font-mono)',
+    fontWeight: '500',
+    marginBottom: '10px'
+  },
+  cardDesc: {
+    fontSize: '0.9rem',
+    lineHeight: '1.5'
+  }
+};
 
 export default About;

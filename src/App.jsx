@@ -1,82 +1,51 @@
 import React from 'react';
-import Navbar from './components/Navbar.jsx';
-import Hero from './components/Hero.jsx';
-import About from './components/About.jsx';
-import Skills from './components/Skills.jsx';
-import Projects from './components/Projects.jsx';
-import InteractiveTerminal from './components/InteractiveTerminal.jsx';
-import InteractivePipeline from './components/InteractivePipeline.jsx';
-import Certifications from './components/Certifications.jsx';
-import Experience from './components/Experience.jsx';
-import Contact from './components/Contact.jsx';
-import Footer from './components/Footer.jsx';
+import Navbar from './components/Navbar';
+import Hero from './components/Hero';
+import About from './components/About';
+import CurrentlyLearning from './components/CurrentlyLearning';
+import Skills from './components/Skills';
+import Projects from './components/Projects';
+import Certifications from './components/Certifications';
+import Experience from './components/Experience';
+import Contact from './components/Contact';
+import Footer from './components/Footer';
 
 function App() {
   return (
-    <div style={{ backgroundColor: 'var(--bg-primary)', minHeight: '100vh', position: 'relative' }}>
-      <div className="bg-grid"></div>
-      <div className="bg-radial"></div>
-      
+    <>
+      {/* Header Sticky Navigation */}
       <Navbar />
-      
+
+      {/* Main Sections */}
       <main>
-        <section id="hero">
-          <Hero />
-        </section>
+        {/* Hero Banner with Console Terminal */}
+        <Hero />
 
-        <section id="about">
-          <About />
-        </section>
+        {/* Profile Biography and Goals */}
+        <About />
 
-        <section id="skills">
-          <Skills />
-        </section>
+        {/* Active Learning Targets */}
+        <CurrentlyLearning />
 
-        <section id="projects">
-          <Projects />
-        </section>
+        {/* Categorized Skills Dashboard */}
+        <Skills />
 
-        <section id="terminal" style={{ padding: '6rem 0', position: 'relative' }}>
-          <div className="container">
-            <div className="section-header">
-              <span className="section-subtitle">Cloud Command Line</span>
-              <h2 className="section-title">Interactive Terminal</h2>
-              <p style={{ color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto', fontSize: '1rem', marginTop: '0.5rem' }}>
-                Interact with my portfolio database using a simulated Unix shell console. Type <code>help</code> to discover commands.
-              </p>
-            </div>
-            <InteractiveTerminal />
-          </div>
-        </section>
+        {/* Feature Pipelines and Architectures */}
+        <Projects />
 
-        <section id="pipeline" style={{ padding: '6rem 0', position: 'relative', backgroundColor: 'var(--bg-secondary)' }}>
-          <div className="container">
-            <div className="section-header">
-              <span className="section-subtitle">Automation Sandbox</span>
-              <h2 className="section-title">Interactive DevOps Pipeline</h2>
-              <p style={{ color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto', fontSize: '1rem', marginTop: '0.5rem' }}>
-                Simulate a real CI/CD deployment flow from code commit to AWS staging. Click "Run Pipeline" to watch the deployment.
-              </p>
-            </div>
-            <InteractivePipeline />
-          </div>
-        </section>
+        {/* AWS / LPIC Credentials Validation */}
+        <Certifications />
 
-        <section id="certifications">
-          <Certifications />
-        </section>
+        {/* Career Growth Timeline */}
+        <Experience />
 
-        <section id="experience">
-          <Experience />
-        </section>
-
-        <section id="contact">
-          <Contact />
-        </section>
+        {/* Get in Touch Form & Deployment Log Terminal */}
+        <Contact />
       </main>
 
+      {/* Footer Navigation & Signatures */}
       <Footer />
-    </div>
+    </>
   );
 }
 
