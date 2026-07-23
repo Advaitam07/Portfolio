@@ -59,7 +59,7 @@ const Footer = () => {
         <div style={styles.brandSection}>
           <a href="#hero" onClick={(e) => handleNavClick(e, 'hero')} style={styles.brand}>
             <Cloud size={18} color="var(--aws-orange)" style={{ marginRight: '6px' }} />
-            <span>ADVAIT</span>
+            <span>Aditya Sharma</span>
             <span style={styles.brandTerminal}>:_</span>
           </a>
           <p style={styles.tagline}>IT Student &amp; Cloud DevOps Specialist</p>
@@ -78,18 +78,18 @@ const Footer = () => {
         {/* Socials & Copyright */}
         <div style={styles.bottomSection}>
           <div style={styles.socials}>
-            <a href="https://github.com/Advaitam07" target="_blank" rel="noopener noreferrer" style={styles.socialIcon} aria-label="GitHub Profile">
+            <a href="https://https://github.com/Advaitam07" target="_blank" rel="noopener noreferrer" style={styles.socialIcon} aria-label="GitHub Profile">
               <Github size={18} />
             </a>
-            <a href="https://linkedin.com/in/advait-devops" target="_blank" rel="noopener noreferrer" style={styles.socialIcon} aria-label="LinkedIn Profile">
+            <a href="https://www.linkedin.com/in/aditya-sharma-73b377363" target="_blank" rel="noopener noreferrer" style={styles.socialIcon} aria-label="LinkedIn Profile">
               <Linkedin size={18} />
             </a>
-            <a href="mailto:contact@advait.dev" style={styles.socialIcon} aria-label="Send Email">
+            <a href="mailto:adityapradipsharma@gmail.com" style={styles.socialIcon} aria-label="Send Email">
               <Mail size={18} />
             </a>
           </div>
           <p style={styles.copy}>
-            &copy; {currentYear} Advait. All rights reserved. Deployed via AWS.
+            &copy; {currentYear} Aditya Sharma. All rights reserved. Deployed via AWS.
           </p>
         </div>
       </div>

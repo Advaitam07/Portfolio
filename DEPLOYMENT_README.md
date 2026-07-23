@@ -134,7 +134,7 @@ Make sure to delete any associated security groups and key pairs you no longer n
 ## Contact
 For any questions, reach out to **Aditya Sharma**:
 - Email: adityapradipsharma@gmail.com
-- GitHub: https://github.com/Advaitam07
+- GitHub: https://https://github.com/Advaitam07
 - LinkedIn: https://www.linkedin.com/in/aditya-sharma-73b377363
 
 ---

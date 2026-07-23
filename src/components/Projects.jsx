@@ -29,7 +29,7 @@ const Projects = () => {
       desc: 'Provisioned a highly-available, scalable VPC network hosting web applications behind an Application Load Balancer with secure private database subnets and Auto Scaling groups.',
       icon: Server,
       tags: ['VPC', 'EC2', 'ALB', 'Auto Scaling', 'RDS', 'Security Groups'],
-      github: 'https://github.com/Advaitam07/aws-two-tier',
+      github: 'https://https://github.com/Advaitam07/aws-two-tier',
       live: '#'
     },
     {
@@ -37,7 +37,7 @@ const Projects = () => {
       desc: 'Automated software deployments via a Git-triggered Jenkins pipeline executing code checks, Unit Tests, building Docker images, and deploying to an orchestrator.',
       icon: Code,
       tags: ['Jenkins', 'Docker', 'Kubernetes', 'SonarQube', 'Git', 'Bash'],
-      github: 'https://github.com/Advaitam07/devops-pipeline',
+      github: 'https://https://github.com/Advaitam07/devops-pipeline',
       live: '#'
     },
     {
@@ -45,7 +45,7 @@ const Projects = () => {
       desc: 'Written a custom python script using Boto3 SDK to automatically identify and clean unassociated elastic IPs, orphaned EBS volumes, and stale S3 backups with email alerts.',
       icon: Cloud,
       tags: ['Python', 'Boto3', 'AWS Lambda', 'SES', 'CloudWatch', 'S3'],
-      github: 'https://github.com/Advaitam07/aws-cost-optimizer',
+      github: 'https://https://github.com/Advaitam07/aws-cost-optimizer',
       live: '#'
     },
     {
@@ -53,7 +53,7 @@ const Projects = () => {
       desc: 'Deployed and configured a multi-node Kubernetes cluster using kubeadm on Linux servers. Set up ingress controller rules, secret definitions, and Helm monitoring stacks.',
       icon: Layers,
       tags: ['Kubernetes', 'Kubeadm', 'Ingress', 'Helm', 'Prometheus', 'Linux'],
-      github: 'https://github.com/Advaitam07/k8s-cluster-setup',
+      github: 'https://https://github.com/Advaitam07/k8s-cluster-setup',
       live: '#'
     },
     {
@@ -61,7 +61,7 @@ const Projects = () => {
       desc: 'Dockerized a polyglot microservice application. Written customized multi-stage Dockerfiles to minimize asset size and set up multi-container docker-compose environments.',
       icon: Wrench,
       tags: ['Docker', 'Docker Compose', 'Multi-stage Build', 'Nginx', 'Node.js'],
-      github: 'https://github.com/Advaitam07/docker-microservices',
+      github: 'https://https://github.com/Advaitam07/docker-microservices',
       live: '#'
     },
     {
@@ -69,7 +69,7 @@ const Projects = () => {
       desc: 'This modern cloud-themed SPA developer portfolio built from scratch in React + Vite, fully responsive, optimized production configurations, and integrated terminal controls.',
       icon: Cloud,
       tags: ['React', 'Vite', 'Modern CSS', 'Lucide Icons', 'Nginx Hosting'],
-      github: 'https://github.com/Advaitam07/portfolio',
+      github: 'https://https://github.com/Advaitam07/portfolio',
       live: '#'
     }
   ];

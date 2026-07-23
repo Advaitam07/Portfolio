@@ -41,7 +41,7 @@ const About = () => {
                 <User size={48} color="var(--aws-orange)" />
               </div>
             </div>
-            <h3 style={styles.profileTitle}>Advait</h3>
+            <h3 style={styles.profileTitle}>Aditya Sharma</h3>
             <p style={styles.profileRole}>AWS / DevOps Student Engineer</p>
             <div style={styles.divider}></div>
             <p style={styles.profileText}>

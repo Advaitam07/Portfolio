@@ -61,7 +61,7 @@ const Hero = () => {
             </div>
             
             <h1 style={styles.mainTitle}>
-              Hi, I'm <span style={styles.nameText}>Advait</span>
+              Hi, I'm <span style={styles.nameText}>Aditya Sharma</span>
             </h1>
             
             <h2 style={styles.typingSub}>
@@ -82,7 +82,7 @@ const Hero = () => {
               </a>
               <a 
                 href="/resume.pdf" 
-                download="Advait_Resume.pdf" 
+                download="Aditya Sharma_Resume.pdf" 
                 className="btn btn-outline" 
                 style={{ ...styles.btn, borderStyle: 'dashed' }}
                 onClick={(e) => {

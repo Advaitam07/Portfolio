@@ -16,7 +16,7 @@ const InteractivePipeline = () => {
 
   const logMessages = [
     [
-      'Cloning repository advaitam07/aws-devops-portfolio...',
+      'Cloning repository Aditya Sharmaam07/aws-devops-portfolio...',
       'Checking branch main, commit SHA: 8a7c29e...',
       'Running eslint rule check...',
       'SUCCESS: 0 linting errors found.'
@@ -76,7 +76,7 @@ const InteractivePipeline = () => {
       ...prev,
       '[PIPELINE SUCCESS] Release v1.0.4 deployed to AWS EC2/EKS production environment.',
       '[INFO] Deployment Health Status: green',
-      `[INFO] Target Endpoint: https://portfolio.advait.dev/`
+      `[INFO] Target Endpoint: https://portfolio.Aditya Sharma.dev/`
     ]);
   };
 

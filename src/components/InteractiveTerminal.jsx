@@ -3,8 +3,8 @@ import { Terminal, ShieldAlert, Cpu, HardDrive, Wifi } from 'lucide-react';
 
 const InteractiveTerminal = () => {
   const [history, setHistory] = useState([
-    { type: 'system', content: 'Advait OS v2.4.0-LTS (x86_64-pc-linux-gnu)' },
-    { type: 'system', content: 'Welcome to Advait\'s Cloud & DevOps Portfolio Terminal Shell!' },
+    { type: 'system', content: 'Aditya Sharma OS v2.4.0-LTS (x86_64-pc-linux-gnu)' },
+    { type: 'system', content: 'Welcome to Aditya Sharma\'s Cloud & DevOps Portfolio Terminal Shell!' },
     { type: 'system', content: 'Type "help" to view the list of available commands.' },
     { type: 'system', content: '' }
   ]);
@@ -55,13 +55,13 @@ const InteractiveTerminal = () => {
     ],
     contact: [
       'Connect with me:',
-      '  Email:    contact@advait.dev',
-      '  GitHub:   github.com/Advaitam07',
-      '  LinkedIn: linkedin.com/in/advait-devops'
+      '  Email:    adityapradipsharma@gmail.com',
+      '  GitHub:   https://github.com/Advaitam07',
+      '  LinkedIn: www.linkedin.com/in/aditya-sharma-73b377363'
     ],
     'sudo cat resume.txt': [
       '========================================================================',
-      '                       ADVAIT - CLOUD & DEVOPS ENGINEER',
+      '                       Aditya Sharma - CLOUD & DEVOPS ENGINEER',
       '========================================================================',
       'EDUCATION:',
       '  Bachelor of Technology in Information Technology',
@@ -154,7 +154,7 @@ const InteractiveTerminal = () => {
         </div>
         <div style={styles.title}>
           <Terminal size={14} style={{ marginRight: '6px' }} />
-          guest@advait-devops-sh: ~
+          guest@Aditya Sharma-devops-sh: ~
         </div>
         <div style={styles.sysStats}>
           <span style={styles.statItem}><Cpu size={12} /> AWS-EC2</span>
@@ -168,7 +168,7 @@ const InteractiveTerminal = () => {
           if (log.type === 'input') {
             return (
               <div key={index} style={styles.line}>
-                <span style={styles.prompt}>guest@advait-devops-sh:~$</span>{' '}
+                <span style={styles.prompt}>guest@Aditya Sharma-devops-sh:~$</span>{' '}
                 <span style={styles.inputText}>{log.content}</span>
               </div>
             );
@@ -198,7 +198,7 @@ const InteractiveTerminal = () => {
 
         {/* Input Form */}
         <form onSubmit={handleSubmit} style={styles.form}>
-          <span style={styles.prompt}>guest@advait-devops-sh:~$</span>
+          <span style={styles.prompt}>guest@Aditya Sharma-devops-sh:~$</span>
           <input
             ref={inputRef}
             type="text"

@@ -65,7 +65,7 @@ const Contact = () => {
       `Injecting package variables: { Sender: "${formData.name}", Email: "${formData.email}" }`,
       'Validating payload size and protection tokens...',
       'SUCCESS: Transaction request completed, Message ID: ses-msg-8a29cf47',
-      'SUCCESS: Message successfully dispatched to mailbox: contact@advait.dev',
+      'SUCCESS: Message successfully dispatched to mailbox: adityapradipsharma@gmail.com',
       'SUCCESS: Container terminated with exit code 0.'
     ];
 
@@ -103,33 +103,33 @@ const Contact = () => {
             </p>
 
             <div style={styles.linksContainer}>
-              <a href="mailto:contact@advait.dev" style={styles.infoLink} className="glass-card">
+              <a href="mailto:adityapradipsharma@gmail.com" style={styles.infoLink} className="glass-card">
                 <div style={{ ...styles.iconCircle, backgroundColor: 'var(--aws-orange-glow)', borderColor: 'rgba(255,153,0,0.15)' }}>
                   <Mail size={18} color="var(--aws-orange)" />
                 </div>
                 <div>
                   <h4 style={styles.linkLabel}>Email Direct</h4>
-                  <p style={styles.linkValue}>contact@advait.dev</p>
+                  <p style={styles.linkValue}>adityapradipsharma@gmail.com</p>
                 </div>
               </a>
 
-              <a href="https://linkedin.com/in/advait-devops" target="_blank" rel="noopener noreferrer" style={styles.infoLink} className="glass-card">
+              <a href="https://www.linkedin.com/in/aditya-sharma-73b377363" target="_blank" rel="noopener noreferrer" style={styles.infoLink} className="glass-card">
                 <div style={{ ...styles.iconCircle, backgroundColor: 'var(--devops-blue-glow)', borderColor: 'rgba(0,210,255,0.15)' }}>
                   <Linkedin size={18} color="var(--devops-blue)" />
                 </div>
                 <div>
                   <h4 style={styles.linkLabel}>LinkedIn</h4>
-                  <p style={styles.linkValue}>linkedin.com/in/advait-devops</p>
+                  <p style={styles.linkValue}>www.linkedin.com/in/aditya-sharma-73b377363</p>
                 </div>
               </a>
 
-              <a href="https://github.com/Advaitam07" target="_blank" rel="noopener noreferrer" style={styles.infoLink} className="glass-card">
+              <a href="https://https://github.com/Advaitam07" target="_blank" rel="noopener noreferrer" style={styles.infoLink} className="glass-card">
                 <div style={{ ...styles.iconCircle, backgroundColor: 'rgba(16,185,129,0.08)', borderColor: 'rgba(16,185,129,0.15)' }}>
                   <Github size={18} color="var(--success-green)" />
                 </div>
                 <div>
                   <h4 style={styles.linkLabel}>GitHub</h4>
-                  <p style={styles.linkValue}>github.com/Advaitam07</p>
+                  <p style={styles.linkValue}>https://github.com/Advaitam07</p>
                 </div>
               </a>
             </div>

@@ -70,7 +70,7 @@ const Navbar = () => {
         {/* Brand Logo */}
         <a href="#hero" onClick={(e) => handleNavClick(e, 'hero')} style={styles.brand}>
           <Cloud size={20} color="var(--aws-orange)" style={{ marginRight: '6px' }} />
-          <span>ADVAIT</span>
+          <span>Aditya Sharma</span>
           <span style={styles.brandTerminal}>:_</span>
         </a>
 
